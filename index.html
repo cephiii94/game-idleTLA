@@ -2,15 +2,9 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Librarian's Ascending v10.5</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Librarian's Ascending v10.0</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
 </head>
 <body>
 
@@ -31,6 +25,7 @@
             <div id="alertBtnContainer" style="display: flex; gap: 10px; margin-top: 15px;"></div>
         </div>
     </div>
+
     <div class="header">
         <div class="stats-row">
             <span>📚 <span id="valKnowledge">0</span> / <span id="valMax">100</span></span>
@@ -44,122 +39,111 @@
         </div>
     </div>
 
-    <div class="main-layout">
-        
-        <div class="left-column">
-            
-            <div class="library-container">
-                <div class="shelf" id="shelfDisplay"></div>
-                <div id="ascend-area">
-                    <button class="btn-ascend" onclick="ascendLibrary()">
-                        🚀 RAK PENUH! PINDAH PERPUSTAKAAN<br>
-                        <small>(Reset, Dapat 1 🪙 Token + 1 ✨ SP)</small>
-                    </button>
-                </div>
-            </div>
-
-            <div class="action-wrapper">
-                <div id="combo-display">COMBO x0</div>
-                <div class="action-buttons">
-                    <button class="btn-action btn-read" onclick="clickBook()">
-                        <span style="font-size: 1.5rem;">📖</span> BACA BUKU
-                    </button>
-                    <button id="btnSell" class="btn-action btn-sell" onclick="sellKnowledge()">
-                        <span style="font-size: 1.2rem;">💰</span> JUAL ILMU<br>
-                        <small>(10 Buku = $1)</small>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="control-panel">
-            <div class="tab-header">
-                <button class="tab-btn active" onclick="openTab('skill')">⚡ UPGRADE</button>
-                <button class="tab-btn" onclick="openTab('tree')">🌳 POHON</button>
-                <button class="tab-btn" onclick="openTab('gacha')">🎲 GACHA</button>
-                <button class="tab-btn gold-tab" onclick="openTab('collection')">🏆 TAS</button>
-            </div>
-
-            <div id="tab-skill" class="tab-content active">
-                <div class="upgrade-item">
-                    <div class="upgrade-info">
-                        <span class="upgrade-title">👓 Kacamata Baca</span>
-                        <span class="upgrade-desc">Klik Power +1</span>
-                    </div>
-                    <button id="btnUpClick" class="btn-buy" onclick="buyClickUpgrade()">
-                        Beli ($<span id="costClick">5</span>)
-                    </button>
-                </div>
-                <div class="upgrade-item">
-                    <div class="upgrade-info">
-                        <span class="upgrade-title">🤓 Sewa Kutu Buku</span>
-                        <span class="upgrade-desc">Auto +1/detik</span>
-                    </div>
-                    <button id="btnBuyAuto1" class="btn-buy" onclick="buyAutoUpgrade(1)">
-                        Beli ($<span id="costAuto1">20</span>)
-                    </button>
-                </div>
-                <div class="upgrade-item">
-                    <div class="upgrade-info">
-                        <span class="upgrade-title">🎓 Mahasiswa Magang</span>
-                        <span class="upgrade-desc">Auto +5/detik</span>
-                    </div>
-                    <button id="btnBuyAuto2" class="btn-buy" onclick="buyAutoUpgrade(2)">
-                        Beli ($<span id="costAuto2">100</span>)
-                    </button>
-                </div>
-            </div>
-
-            <div id="tab-tree" class="tab-content">
-                <div style="text-align:center; margin-bottom:10px;">
-                    <button class="btn-reset-skill" onclick="resetSkills()">🔄 Reset Skill (Biaya: 1 🪙)</button>
-                </div>
-                <div class="skill-tree-container">
-                    <div class="skill-col">
-                        <div class="skill-header red">🔥 ACTIVE</div>
-                        <div id="skill-s1" class="skill-node red" onclick="buySkill('s1')"><b>Jari Kilat</b><br><small>Klik +2</small></div>
-                        <div class="line">⬇</div>
-                        <div id="skill-s2" class="skill-node red locked" onclick="buySkill('s2')"><b>Combo Master</b><br><small>Durasi 3dtk</small></div>
-                        <div class="line">⬇</div>
-                        <div id="skill-s3" class="skill-node red locked" onclick="buySkill('s3')"><b>Flash Read</b><br><small>Bonus Uang</small></div>
-                    </div>
-                    <div class="skill-col">
-                        <div class="skill-header blue">💤 IDLE</div>
-                        <div id="skill-s4" class="skill-node blue" onclick="buySkill('s4')"><b>Mandor</b><br><small>Speed +10%</small></div>
-                        <div class="line">⬇</div>
-                        <div id="skill-s5" class="skill-node blue locked" onclick="buySkill('s5')"><b>Negosiasi</b><br><small>Diskon 10%</small></div>
-                        <div class="line">⬇</div>
-                        <div id="skill-s6" class="skill-node blue locked" onclick="buySkill('s6')"><b>Investasi</b><br><small>+$1/detik</small></div>
-                    </div>
-                    <div class="skill-col">
-                        <div class="skill-header green">🍀 LUCK</div>
-                        <div id="skill-s7" class="skill-node green" onclick="buySkill('s7')"><b>Pedagang</b><br><small>Jual +20%</small></div>
-                        <div class="line">⬇</div>
-                        <div id="skill-s8" class="skill-node green locked" onclick="buySkill('s8')"><b>Lucky Charm</b><br><small>Jackpot +5%</small></div>
-                        <div class="line">⬇</div>
-                        <div id="skill-s9" class="skill-node green locked" onclick="buySkill('s9')"><b>Kurator</b><br><small>Buff Artifact</small></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tab-gacha" class="tab-content" style="text-align: center;">
-                <div class="gacha-machine">
-                    <div class="gacha-glass">🔮</div>
-                    <h3>Kotak Misteri</h3>
-                    <p style="font-size: 0.8rem; color:#666; margin-bottom: 15px;">Dapatkan Artifact langka untuk memperkuat perpustakaanmu!</p>
-                    <button id="btnPull" class="btn-pull-gacha" onclick="pullGacha()">Buka Kotak (1 🪙)</button>
-                </div>
-            </div>
-
-            <div id="tab-collection" class="tab-content">
-                <div id="collectionList"><p class="empty-msg">Belum ada Artifact.</p></div>
-            </div>
+    <div class="library-container">
+        <div class="shelf" id="shelfDisplay"></div>
+        <div id="ascend-area">
+            <button class="btn-ascend" onclick="ascendLibrary()">
+                🚀 RAK PENUH! PINDAH PERPUSTAKAAN<br>
+                <small>(Reset, Dapat 1 🪙 Token + 1 ✨ SP)</small>
+            </button>
         </div>
     </div>
+
+    <div class="action-area" style="display:block; width:95%; margin:0 auto 10px auto;">
+        <div id="combo-display">COMBO x0</div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 8px;">
+            <button class="btn-action btn-read" onclick="clickBook()">📖 BACA</button>
+            <button id="btnSell" class="btn-action btn-sell" onclick="sellKnowledge()">
+                JUAL<br><small>(10 Buku = $1)</small>
+            </button>
+        </div>
+    </div>
+
+    <div class="control-panel">
+        <div class="tab-header">
+            <button class="tab-btn active" onclick="openTab('skill')">⚡ UPGRADE</button>
+            <button class="tab-btn" onclick="openTab('tree')">🌳 POHON</button>
+            <button class="tab-btn" onclick="openTab('gacha')">🎲 GACHA</button>
+            <button class="tab-btn gold-tab" onclick="openTab('collection')">🏆 TAS</button>
+        </div>
+
+        <div id="tab-skill" class="tab-content active">
+            <div class="upgrade-item">
+                <div class="upgrade-info">
+                    <span class="upgrade-title">Kacamata Baca</span>
+                    <span class="upgrade-desc">Klik Power +1</span>
+                </div>
+                <button id="btnUpClick" class="btn-buy" onclick="buyClickUpgrade()">
+                    Beli ($<span id="costClick">5</span>)
+                </button>
+            </div>
+            <div class="upgrade-item">
+                <div class="upgrade-info">
+                    <span class="upgrade-title">Sewa Kutu Buku</span>
+                    <span class="upgrade-desc">Auto +1/detik</span>
+                </div>
+                <button id="btnBuyAuto1" class="btn-buy" onclick="buyAutoUpgrade(1)">
+                    Beli ($<span id="costAuto1">20</span>)
+                </button>
+            </div>
+            <div class="upgrade-item">
+                <div class="upgrade-info">
+                    <span class="upgrade-title">Mahasiswa Magang</span>
+                    <span class="upgrade-desc">Auto +5/detik</span>
+                </div>
+                <button id="btnBuyAuto2" class="btn-buy" onclick="buyAutoUpgrade(2)">
+                    Beli ($<span id="costAuto2">100</span>)
+                </button>
+            </div>
+        </div>
+
+        <div id="tab-tree" class="tab-content">
+            <div style="text-align:center; margin-bottom:10px;">
+                <button class="btn-reset-skill" onclick="resetSkills()">🔄 Reset Skill (Biaya: 1 🪙)</button>
+            </div>
+            <div class="skill-tree-container">
+                <div class="skill-col">
+                    <div class="skill-header red">🔥 ACTIVE</div>
+                    <div id="skill-s1" class="skill-node red" onclick="buySkill('s1')"><b>Jari Kilat</b><br><small>Klik +2</small></div>
+                    <div class="line">⬇</div>
+                    <div id="skill-s2" class="skill-node red locked" onclick="buySkill('s2')"><b>Combo Master</b><br><small>Durasi 3dtk</small></div>
+                    <div class="line">⬇</div>
+                    <div id="skill-s3" class="skill-node red locked" onclick="buySkill('s3')"><b>Flash Read</b><br><small>Bonus Uang</small></div>
+                </div>
+                <div class="skill-col">
+                    <div class="skill-header blue">💤 IDLE</div>
+                    <div id="skill-s4" class="skill-node blue" onclick="buySkill('s4')"><b>Mandor</b><br><small>Speed +10%</small></div>
+                    <div class="line">⬇</div>
+                    <div id="skill-s5" class="skill-node blue locked" onclick="buySkill('s5')"><b>Negosiasi</b><br><small>Diskon 10%</small></div>
+                    <div class="line">⬇</div>
+                    <div id="skill-s6" class="skill-node blue locked" onclick="buySkill('s6')"><b>Investasi</b><br><small>+$1/detik</small></div>
+                </div>
+                <div class="skill-col">
+                    <div class="skill-header green">🍀 LUCK</div>
+                    <div id="skill-s7" class="skill-node green" onclick="buySkill('s7')"><b>Pedagang</b><br><small>Jual +20%</small></div>
+                    <div class="line">⬇</div>
+                    <div id="skill-s8" class="skill-node green locked" onclick="buySkill('s8')"><b>Lucky Charm</b><br><small>Jackpot +5%</small></div>
+                    <div class="line">⬇</div>
+                    <div id="skill-s9" class="skill-node green locked" onclick="buySkill('s9')"><b>Kurator</b><br><small>Buff Artifact</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-gacha" class="tab-content" style="text-align: center;">
+            <div class="gacha-machine">
+                <div class="gacha-glass">🔮</div>
+                <h3>Kotak Misteri</h3>
+                <button id="btnPull" class="btn-pull-gacha" onclick="pullGacha()">Buka Kotak (1 🪙)</button>
+            </div>
+        </div>
+
+        <div id="tab-collection" class="tab-content">
+            <div id="collectionList"><p class="empty-msg">Kosong</p></div>
+        </div>
+    </div>
+
     <div class="footer-controls">
         <button class="btn-reset" onclick="hardReset()">⚠️ Reset Data</button>
-        <span style="margin-left: 10px;">| v10.5 Remastered by Bri</span>
     </div>
 
     <script src="script.js"></script>

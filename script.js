@@ -391,10 +391,6 @@ function renderCollection() {
     }
 }
 
-function saveGame() {
-    localStorage.setItem('librarianSaveV10', JSON.stringify(game));
-}
-
 function loadGame() {
     let saved = localStorage.getItem('librarianSaveV10'); 
     if (saved) {
