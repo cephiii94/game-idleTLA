@@ -391,17 +391,9 @@ function renderCollection() {
     }
 }
 
-// ==========================================
-// FUNGSI SAVE (YANG HILANG)
-// ==========================================
 function saveGame() {
-    // Simpan object 'game' ke local storage browser
     localStorage.setItem('librarianSaveV10', JSON.stringify(game));
-    
-    // (Opsional) Cek di console kalau mau lihat log-nya
-    // console.log("Game Saved!"); 
 }
-
 
 function loadGame() {
     let saved = localStorage.getItem('librarianSaveV10'); 
